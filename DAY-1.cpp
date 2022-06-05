@@ -1,26 +1,50 @@
-//  Kadane's Algo 
 #include <bits/stdc++.h> 
-long long maxSubarraySum(int arr[], int n)
+void sort012(int *arr, int n)
 {
-    /*
-        Don't write main().
-        Don't read input, it is passed as function argument.    
-        No need to print anything.
-        Taking input and printing output is handled automatically.
-    */
-    long long maxi = arr[0];
-    long long sum =0;
+   //   Write your code here
+      int nextZero=0;
+      int nextTwo = n-1;
+    for(int i=0,j=n-1;i<=nextTwo && j>0;){
+        if(arr[i] == 0){
+            swap(arr[i],arr[nextZero]);
+            i++;
+            nextZero++;
+        }
+        else if(arr[i] == 2){
+             swap(arr[i],arr[nextTwo]);
+             nextTwo--;
+          }
+        else{
+            i++;
+        }
+    }
+}
+
+2nd Approach
+
+void sort012(int *arr, int n){
+    int count0=0;
+    int count1=0;
+    int count2=0;
     for(int i=0;i<n;i++){
-        sum += arr[i];
-        if(sum < 0){
-            sum=0;
+        if(arr[i] ==0){
+            count0++;
         }
-        else if(sum > 0 && sum > maxi){
-            maxi = sum;
+        else if(arr[i] == 1){
+            count1++;
+        }
+        else if(arr[i] == 2){
+            count2++;
         }
     }
-    if(maxi == arr[0] && sum==0){
-        return sum;
+    for(int i=0;i<count0;i++){
+        arr[i] = 0;
     }
-    return maxi;
+     for(int i=count0;i<(count0+ count1);i++){
+        arr[i] = 1;
+    }
+     for(int i=count0+count1;i<n;i++){
+        arr[i] = 2;
+    }
+    
 }
