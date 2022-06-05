@@ -1,1 +1,26 @@
-//  Welcome to day-1
+//  Kadane's Algo 
+#include <bits/stdc++.h> 
+long long maxSubarraySum(int arr[], int n)
+{
+    /*
+        Don't write main().
+        Don't read input, it is passed as function argument.    
+        No need to print anything.
+        Taking input and printing output is handled automatically.
+    */
+    long long maxi = arr[0];
+    long long sum =0;
+    for(int i=0;i<n;i++){
+        sum += arr[i];
+        if(sum < 0){
+            sum=0;
+        }
+        else if(sum > 0 && sum > maxi){
+            maxi = sum;
+        }
+    }
+    if(maxi == arr[0] && sum==0){
+        return sum;
+    }
+    return maxi;
+}
