@@ -1,20 +1,26 @@
-//  Welcome to day-1
-vector<vector<long long int>> printPascal(int n) 
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &permutation, int n)
 {
-  // Write your code here.
-    vector<vector<long long int>> ans;
-    vector<long long int> temp;
-    for(int i=0;i<n;i++){
-        temp.clear();
-        for(int j=0;j<=i;j++){
-            if(i==j || j==0){
-                temp.push_back(1);
-            }
-            else{
-                temp.push_back(ans[i-1][j-1] + ans[i-1][j]);
-            }
+    //  Write your code here.
+    // int maxi = 0;
+    int k,l;
+//     int n1 = permutation.size();
+    for(k= n-2;k>=0;k--){
+        if(permutation[k] < permutation[k+1]){
+            break;
         }
-        ans.push_back(temp);
     }
-    return ans;
+if(k<0){
+     reverse(permutation.begin(),permutation.end());
+}  else{
+    for(l= n-1;l>k;l--){
+        if(permutation[k] < permutation[l]){
+            break;
+        }
+  }   
+
+    swap(permutation[k],permutation[l]);
+    reverse(permutation.begin()+k+1,permutation.end());
+  }
+    return permutation;
 }
