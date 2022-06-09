@@ -1,44 +1,52 @@
 
 // 1st approach 
-// Using extra space
-vector<int> ninjaAndSortedArrays(vector<int>& arr1, vector<int>& arr2, int m, int n) {
-	// Write your code here.
-    if(n==0){
-        return arr1;
-    }
-    if(m==0){
-        return arr2;
-    }
-    int k=0;
-    vector<int> ans(n+m);
-    for(int i=0;i<m;i++){
-        ans[k] = arr1[i];
-        k++;
-    }
-     for(int i=0;i<n;i++){
-        ans[k] = arr2[i];
-         k++;
-    }
-    sort(ans.begin(), ans.end());
-    return ans;
-}
+// Time complexity -> N(LOG(N))
 
-// 2nd approach 
-// Using O(m*n) time complexity
-#include <bits/stdc++.h> 
-vector<int> ninjaAndSortedArrays(vector<int>& arr1, vector<int>& arr2, int m, int n) {
-	// Write your code here.
-    int i=0, j =0,k;
-    while(i<m){
-        if(arr2[0] < arr1[i]){
-            swap(arr1[i],arr2[0]);
-        }
-        i++;
-         sort(arr2.begin(),arr2.end());
-    }
-    for(int p=0;p<n;p++){
-        arr1[i] = arr2[p];
-        i++;
-    }
-    return arr1;
+/*
+
+	Time complexity: O(N*log(N)) 
+	Space complexity: O(1)
+	
+	Where N is the length of the given array. 
+	
+*/
+
+#include <algorithm>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// sorting the array
+	sort(arr.begin(), arr.end());
+	
+	int r, m;
+	
+	for(int i = 0; i < n - 1; i += 1)
+	{
+		// checking if two adjacent numbers are same
+		if(arr[i] == arr[i+1])
+		{
+			r = arr[i];
+			break;
+		}
+	}
+	
+	// calculating the sum of the given array
+	int currSum = 0;
+	for(int i = 0; i < n; i += 1)
+	{
+		currSum += arr[i];
+	}
+	
+	// sum of the numbers from 1 to n 
+	int actualSum = n*(n + 1)/2; 
+	
+	m = actualSum - (currSum - r);
+	
+	pair<int, int>ans;
+	
+	ans.first = m;
+	ans.second = r;
+	
+	return ans;
+	 
 }
