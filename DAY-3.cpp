@@ -18,7 +18,7 @@ int findMajorityElement(int arr[], int n) {
 }
 
 // 2nd approach 
-// Moyes - voting algo
+// Moore's - voting algo
 
 #include<bits/stdc++.h>
 
