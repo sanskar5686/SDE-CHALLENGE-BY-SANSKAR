@@ -1,27 +1,44 @@
 // 1st approach 
-// Using hashmaps - Here we have to iterate in the entire vector
+// Using normal searching - O(m*n) 
 
 #include <bits/stdc++.h> 
-vector<int> majorityElementII(vector<int> &arr)
-{
+#include <vector>
+
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
     // Write your code here.
-    int n = arr.size();
-    unordered_map<int,int> map;
-    for(int i=0;i<n;i++){
-        map[arr[i]]++;
-    }
-    set<int> ans_lite;
-    for(int i=0;i<n;i++){
-        if(map[arr[i]] > n/3){
-            ans_lite.insert(arr[i]);
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+        if(mat[i][j] ==target){
+            return true;
+        }
         }
     }
-    vector<int> ans;
-    set<int, greater<int> >::iterator itr;
-   for(itr=ans_lite.begin();itr!=ans_lite.end();itr++)
-    ans.push_back(*itr);
-    
-   return ans;
+    return false;
 }
 
 // 2nd approach 
+// Using binary search - O(log(m*n))
+
+#include <bits/stdc++.h> 
+#include <vector>
+
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    // Write your code here.
+//     int n = mat.size();
+//     int m = mat[0].size();
+    int start = 0;
+    int end = (m*n)-1;
+    while(start <=end){
+        int mid = (start +end)/2;
+        if(mat[mid/n][mid%n] ==target){
+            return true;
+        }
+        else if(mat[mid/n][mid%n] < target){
+             start = mid+1;
+        }
+        else{
+             end = mid-1;
+        }
+    }
+    return false;
+}
