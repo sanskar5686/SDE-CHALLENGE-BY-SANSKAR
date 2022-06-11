@@ -25,3 +25,44 @@ vector<int> majorityElementII(vector<int> &arr)
 }
 
 // 2nd approach 
+// Boyer's voting algo 
+
+   int num1=-1,num2 = -1, c1 = 0,c2=0;
+    for(auto num:arr){
+        if(num==num1){
+            c1++;
+        }
+        else if(num==num2){
+            c2++;
+        }
+        else if(c1==0){
+            num1 = num;
+            c1=1;
+        }
+        else if(c2 ==0){
+            num2 = num;
+            c2=1;
+        }
+        else{
+            c1--,c2--;
+        }
+    }
+    vector<int> ans;
+    int n = arr.size();
+    int count1=0,count2=0;
+    for(int i=0;i<arr.size();i++){
+        if(arr[i] == num1){
+            count1++;
+        }
+        if(arr[i] == num2){
+            count2++;
+        }
+    }
+    if(count1 > n/3){
+        ans.push_back(num1);
+    }
+    if(count2 > n/3){
+        ans.push_back(num2);
+    }
+    return ans;
+}
